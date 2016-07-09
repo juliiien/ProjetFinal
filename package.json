@@ -1,0 +1,13 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "serveurExpres.js",
+  "dependencies": {
+   "socket.io": "1.4.8"
+  },
+  "author": ""
+
+   
+  
+}

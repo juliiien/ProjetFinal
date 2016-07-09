@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Socket IO</title>
+	<style>
+        #zone_chat strong {
+            color: white;
+            background-color: black;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+ <h1>Welcome</h1>
+ <button id ="hello"> Hello server</button>
+ 
+ 	
+ <form action="/" method="post" id="form">
+    <input type="text" name="message" id="message" placeholder="message"/>
+    <input type="submit" id="msg" value="Envoyer" />
+ </form>
+
+ <section id="zoneMsg">
+            
+ </section>
+
+
+ <script src="/socket.io/socket.io.js"></script>
+ <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+ <script>
+ 	var socket = io.connect('http://localhost:8080');
+
+	var login = prompt("Entrez votre login", "toto");
+ 	socket.emit('login',login);
+
+
+ 	socket.on('message', function(data) {
+        $('#zoneMsg').prepend(data.pseudo + ': ' + data.message + '</br>');
+    })
+
+ 	$('#hello').click(function (){
+ 		socket.emit('message','Hello serveur !!!');
+ 	});
+
+ 	$('#form').submit(function () {
+        var message = $('#message').val();
+        socket.emit('message', message); 
+       $('#zoneMsg').prepend(login + ': ' + message + '</br>');
+       return false;
+    });
+ 
+
+ </script>
+</body>
+</html>
